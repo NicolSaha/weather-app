@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="public/styles/index.css" />
+    <script src="public/js/index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0" defer></script>
+    <script src="public/js/searchcity.js" defer></script>
+    <title>Weather App</title>
+  </head>
+  <body class="min-h-screen bg-gray-800">
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-7xl mx-auto">
+      <!-- HEADER -->
+      <header
+        class="py-6 px-2 md:flex md:items-center md:justify-between bg-white"
+      >
+        <div class="flex-1 min-w-0">
+          <h2
+            class="m-2 text-2xl font-bold leading-7 text-teal-800 sm:text-3xl sm:leading-9 sm:truncate"
+          >
+            Weather Application
+          </h2>
+        </div>
+        <div class="mt-4 flex md:mt-0 md:ml-4">
+          <span class="rounded-md">
+            <button
+              type="button"
+              id="currentlocation"
+              class="hidden m-2 md:inline-flex items-center px-4 py-2 border border-transparent rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray focus:border-gray-700 active:bg-gray-700 transition duration-150 ease-in-out"
+            >
+              Current Location
+            </button>
+          </span>
+        </div>
+      </header>
+
+      <div class="px-4 py-5 sm:px-6 flex justify-center items-center">
+        <!-- SEARCH FORM -->
+        <form id="search-form" class="inline-flex">
+          <!-- SUBMITBTN -->
+          <input
+            id="searchbutton"
+            type="submit"
+            value="Forecast"
+            class="mt-5 m-2 bg-gray-100 text-teal-800 font-semibold py-1 px-2 border rounded-md shadow hover:bg-teal-100 focus:outline-none focus:shadow-outline-gray focus:border-gray-400 active:bg-teal-300 transition duration-150 ease-in-out"
+          />
+          <!-- CITY INPUT -->
+          <input
+            id="search-city-input"
+            class="submit w-48 md:w-3/4 bg-white text-gray-900 focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-8 h-10 mt-4 appearance-none leading-normal"
+            type="search"
+            placeholder="Type your city here"
+            autofocus="on"
+          />
+        </form>
+      </div>
+
+      <!-- DISPLAY WEATHER -->
+      <section class="flex-col items-center w-screen justify-between">
+        <!-- DAY 1 -->
+        <div
+          class="col-span-1 w-full flex flex-col text-center items-center justify-center bg-white rounded-lg shadow m-2"
+        >
+          <div class="flex-1 flex flex-col p-8">
+            <span id="weathericontoday"><img src="" alt="" /></span>
+            <span id="temperature-description" class="sm:italic"></span>
+            <div class="inline-flex">
+              <span
+                id="current-temperature"
+                class="my-6 text-gray-900 text-6xl leading-5 font-medium"
+              ></span>
+              <span class="temperature-units mt-2">
+                <a href="#" id="celsius-link-main" class="active"> °C</a> |
+                <a href="#" id="fahrenheit-link-main" style="color: gray;"
+                  >°F</a
+                >
+              </span>
+            </div>
+            <dl class="mt-1 flex-grow flex flex-col justify-between">
+              <dd class="text-gray-500 text-sm leading-5">
+                <span id="chosencity"></span>
+              </dd>
+              <dd class="mt-3">
+                <span
+                  id="currentDay"
+                  class="px-2 py-1 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full"
+                ></span>
+              </dd>
+            </dl>
+          </div>
+        </div>
+
+        <!-- DISPLAY FORECAST -->
+        <ul class="overflow-x-scroll w-screen justify-between">
+          <div id="forecast" class="col-span-1 flex flex-row"></div>
+        </ul>
+      </section>
+
+      <div class="flex-wrap sm:flex sm:flex-no-wrap">
+        <!-- ADDED CITY #1 -->
+        <section class="m-2 w-full flex-col sm:w-1/2 sm:flex-row">
+          <div
+            id="addedCityOne"
+            class="bg-white overflow-hidden shadow rounded-lg"
+          >
+            <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
+              <form id="search-form-added-city-one">
+                <!-- INPUT -->
+                <input
+                  id="search-city-input-added-city-one"
+                  type="text"
+                  placeholder="Type your city here"
+                  autofocus="on"
+                />
+                <!-- SUBMITBTN -->
+                <button
+                  id="add-city-one"
+                  type="submit"
+                  class="submit right-0 bg-gray-100 text-teal-800 font-semibold py-1 px-2 border rounded-md shadow hover:bg-teal-100 focus:outline-none focus:shadow-outline-gray focus:border-gray-400 active:bg-teal-300 transition duration-150 ease-in-out"
+                >
+                  Add
+                </button>
+              </form>
+            </div>
+
+            <div class="px-4 py-5 sm:p-6">
+              <p class="shown-text block">Add Another City Here</p>
+              <div class="hidden-text"></div>
+
+              <div class="flex flex-inline">
+                <!-- CHOSEN CITY -->
+                <p class="font-bold" id="chosencity-added-one"></p>
+
+                <!-- TEMPERATURE -->
+                <p id="current-temperature-added-one">
+                  <strong></strong>
+                </p>
+                <!-- TEMPERATURE UNITS -->
+                <span id="temperature-units-added-one" class="hidden">
+                  <p class="temperature-units-added-one-class">
+                    <a href="#" id="celsius-link-added-one" class="active">
+                      °C</a
+                    >
+                    |
+                    <a
+                      href="#"
+                      id="fahrenheit-link-added-one"
+                      style="color: gray;"
+                      >°F</a
+                    >
+                  </p></span
+                >
+              </div>
+              <div class="flex flex-inline">
+                <!-- TEMPERATURE DESCRIPTION -->
+                <p class="mt-2" id="temperature-description-added-one"></p>
+                <!-- WEATHER ICON -->
+                <span id="weathericontoday-added-one"
+                  ><img src="" width="40px" alt=""
+                /></span>
+                <!-- DATE -->
+                <p id="current-date-one"></p>
+              </div>
+              <!-- HUMIDITY-->
+              <div class="flex flex-row">
+                <img
+                  id="humidity-img-one"
+                  src="public/images/umbrella.svg"
+                  width="20px"
+                  alt=""
+                  class="hidden"
+                />
+                <p id="humidity-one"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ADDED CITY #2 -->
+        <section class="m-2 w-full flex-col sm:w-1/2 sm:flex-row">
+          <div
+            id="addedCityTwo"
+            class="bg-white overflow-hidden shadow rounded-lg"
+          >
+            <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
+              <form id="search-form-added-city-two">
+                <!-- INPUT -->
+                <input
+                  id="search-city-input-added-city-two"
+                  type="text"
+                  placeholder="Type your city here"
+                  autofocus="on"
+                />
+                <!-- SUBMITBTN -->
+                <button
+                  id="add-city-two"
+                  type="submit"
+                  class="submit right-0 bg-gray-100 text-teal-800 font-semibold py-1 px-2 border rounded-md shadow hover:bg-teal-100 focus:outline-none focus:shadow-outline-gray focus:border-gray-400 active:bg-teal-300 transition duration-150 ease-in-out"
+                >
+                  Add
+                </button>
+              </form>
+            </div>
+
+            <div class="px-4 py-5 sm:p-6">
+              <p class="shown-text-two block">Add Another City Here</p>
+              <div class="hidden-text-two"></div>
+
+              <div class="flex flex-inline">
+                <!-- CHOSEN CITY -->
+                <p class="font-bold" id="chosencity-added-two"></p>
+
+                <!-- TEMPERATURE -->
+                <p id="current-temperature-added-two">
+                  <strong></strong>
+                </p>
+                <!-- TEMPERATURE UNITS -->
+                <span id="temperature-units-added-two" class="hidden">
+                  <p class="temperature-units-added-two-class">
+                    <a href="#" id="celsius-link-added-two" class="active">
+                      °C</a
+                    >
+                    |
+                    <a
+                      href="#"
+                      id="fahrenheit-link-added-one"
+                      style="color: gray;"
+                      >°F</a
+                    >
+                  </p></span
+                >
+              </div>
+              <div class="flex flex-inline">
+                <!-- TEMPERATURE DESCRIPTION -->
+                <p class="mt-2" id="temperature-description-added-two"></p>
+                <!-- WEATHER ICON -->
+                <span id="weathericontoday-added-two"
+                  ><img src="" width="40px" alt=""
+                /></span>
+                <!-- DATE -->
+                <p id="current-date-two"></p>
+              </div>
+              <!-- HUMIDITY-->
+              <div class="flex flex-row">
+                <img
+                  id="humidity-img-two"
+                  src="public/images/umbrella.svg"
+                  width="20px"
+                  alt=""
+                  class="hidden"
+                />
+                <p id="humidity-two"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- LAST UPDATED -->
+      <div class="m-2 justify-center items-center flex md:flex-row">
+        <h2
+          class="hidden sm:inline-flex text-gray-500 text-xs font-medium uppercase tracking-wide"
+        >
+          Weekly Weather Forecast.
+        </h2>
+        <h2
+          class="text-gray-500 text-xs font-medium uppercase tracking-wide inline-flex"
+        >
+          Last Updated:
+        </h2>
+
+        <span
+          id="current-date"
+          class="px-2 py-1 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full"
+        >
+        </span>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="bg-teal-100">
+        <div
+          class="max-w-screen-xl mx-auto py-6 px-2 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
+        >
+          <div class="hidden sm:flex justify-center md:order-2">
+            <a
+              href="https://github.com/NicolSaha/weather-app"
+              class="ml-6 text-gray-900 hover:text-teal-900"
+            >
+              <span class="sr-only">GitHub</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
+          <div class="mt-8 md:mt-0 md:order-1">
+            <p
+              class="text-center text-base leading-6 text-gray-900 hover:text-teal-900"
+            >
+              <a
+                href="https://github.com/NicolSaha/weather-app"
+                target="_blank"
+              >
+                &copy; Nicol Saha, Inc. All rights reserved 👩🏻‍💻
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
