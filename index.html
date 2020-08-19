@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="public/styles/index.css" />
-    <script src="public/js/index.js" defer></script>
+    <script src="public/js/index.js" type="module" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0" defer></script>
-    <script src="public/js/searchcity.js" defer></script>
+    <script src="public/js/searchCity.js" defer></script>
     <title>Weather App</title>
   </head>
   <body class="min-h-screen bg-gray-800">
@@ -66,17 +66,23 @@
           <div class="flex-1 flex flex-col p-8">
             <span id="weathericontoday"><img src="" alt="" /></span>
             <span id="temperature-description" class="sm:italic"></span>
+            <div class="flex flex-row">
+              <img
+                id="humidity-img-main"
+                src="public/images/umbrella.svg"
+                width="20px"
+                alt=""
+              />
+              <p id="humidity"></p>
+            </div>
             <div class="inline-flex">
               <span
                 id="current-temperature"
                 class="my-6 text-gray-900 text-6xl leading-5 font-medium"
               ></span>
-              <span class="temperature-units mt-2">
-                <a href="#" id="celsius-link-main" class="active"> °C</a> |
-                <a href="#" id="fahrenheit-link-main" style="color: gray;"
-                  >°F</a
-                >
-              </span>
+              <p class="temperature-units mt-2">
+                °C
+              </p>
             </div>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
               <dd class="text-gray-500 text-sm leading-5">
@@ -139,19 +145,10 @@
                 </p>
                 <!-- TEMPERATURE UNITS -->
                 <span id="temperature-units-added-one" class="hidden">
-                  <p class="temperature-units-added-one-class">
-                    <a href="#" id="celsius-link-added-one" class="active">
-                      °C</a
-                    >
-                    |
-                    <a
-                      href="#"
-                      id="fahrenheit-link-added-one"
-                      style="color: gray;"
-                      >°F</a
-                    >
-                  </p></span
-                >
+                  <p class="temperature-units-added-one-class text-xs">
+                    °C
+                  </p>
+                </span>
               </div>
               <div class="flex flex-inline">
                 <!-- TEMPERATURE DESCRIPTION -->
@@ -218,17 +215,8 @@
                 </p>
                 <!-- TEMPERATURE UNITS -->
                 <span id="temperature-units-added-two" class="hidden">
-                  <p class="temperature-units-added-two-class">
-                    <a href="#" id="celsius-link-added-two" class="active">
-                      °C</a
-                    >
-                    |
-                    <a
-                      href="#"
-                      id="fahrenheit-link-added-one"
-                      style="color: gray;"
-                      >°F</a
-                    >
+                  <p class="temperature-units-added-two-class text-xs">
+                    °C
                   </p></span
                 >
               </div>
